@@ -2,7 +2,6 @@
 using EmployeesApp.Web.Services;
 using EmployeesApp.Web.Views.Employees;
 using Microsoft.AspNetCore.Mvc;
-using System.Reflection;
 
 namespace EmployeesApp.Web.Controllers
 {
@@ -23,7 +22,7 @@ namespace EmployeesApp.Web.Controllers
                     Id = o.Id,
                     Name = o.Name,
                     Email = o.Email,
-                    ShowAsHighlighted = o.Email.StartsWith("admin")
+                    ShowAsHighlighted = o.Email.StartsWith("admin", StringComparison.CurrentCultureIgnoreCase),
                 })
                 .ToArray()
             };
