@@ -13,6 +13,16 @@ namespace EmployeesApp.Web.Controllers
         {
             var model = service.GetAll();
 
+            var viewModel = model.Select(e => new IndexVM()
+            {
+                Id = e.Id,
+                Name = e.Name,
+                Email = e.Email,
+                ShowAsHighlighted = e.Email.StartsWith("admin")
+            }).ToArray();
+
+
+
             //foreach (var emp in model)
             //    Console.WriteLine($"{emp.Name}: {emp.Id}");
 
