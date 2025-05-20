@@ -11,6 +11,7 @@ public class CreateVM
     public required string Email { get; set; }
 
     [Range(4, 4, ErrorMessage = "Incorrect answer. What is 2 + 2?")]
+    [Display(Name = "What is 2 + 2?")]
     public int BotCheck { get; set; }
 
 }
