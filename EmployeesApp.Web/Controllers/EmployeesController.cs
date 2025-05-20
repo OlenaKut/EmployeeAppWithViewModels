@@ -1,4 +1,6 @@
 ﻿using EmployeesApp.Web.Models;
+using EmployeesApp.Web.Views.Employees;
+
 using EmployeesApp.Web.Services;
 using Microsoft.AspNetCore.Mvc;
 
@@ -13,20 +15,23 @@ namespace EmployeesApp.Web.Controllers
         {
             var model = service.GetAll();
 
-            var viewModel = model.Select(e => new IndexVM()
+            var viewModel = new IndexVM
             {
-                Id = e.Id,
-                Name = e.Name,
-                Email = e.Email,
-                ShowAsHighlighted = e.Email.StartsWith("admin")
-            }).ToArray();
-
+                EmployeeItems = model
+                .Select(o => new IndexVM.EmployeeItemVM
+                {
+                    Name = o.Name,
+                    Email = o.Email,
+                    ShowAsHighlighted = o.Email.StartsWith("admin")
+                })
+                .ToArray()
+            };
 
 
             //foreach (var emp in model)
             //    Console.WriteLine($"{emp.Name}: {emp.Id}");
 
-            return View(model);
+            return View(viewModel);
         }
 
         [HttpGet("create")]
@@ -36,12 +41,19 @@ namespace EmployeesApp.Web.Controllers
         }
 
         [HttpPost("create")]
-        public IActionResult Create(Employee employee)
+        public IActionResult Create(CreateVM viewModel)
         {
             if (!ModelState.IsValid)
                 return View();
 
-            service.Add(employee);
+            var model = new Employee
+            {
+                Name = viewModel.Name,
+                Email = viewModel.Email
+            };
+
+            service.Add(model);
+
             return RedirectToAction(nameof(Index));
         }
 
