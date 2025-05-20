@@ -7,3 +7,9 @@
 <h4>ID: <i>@Model.Id</i></h4>
 <h4>Name: <i>@Model.Name</i></h4>
 <h4>E-mail: <i>@Model.Email</i></h4>
+
+
+@if (Model.NameStartsWithA)
+{
+    <p style="color: green;">This name starts with 'A'!</p>
+}

@@ -68,7 +68,7 @@ namespace EmployeesApp.Web.Controllers
                 Id = model.Id,
                 Name = model.Name,
                 Email = model.Email,
-                NameStartsWithA = false,
+                NameStartsWithA = model.Name.StartsWith("A", StringComparison.OrdinalIgnoreCase)
             };
 
             return View(viewModel);
