@@ -1,8 +1,8 @@
 ﻿using EmployeesApp.Web.Models;
-using EmployeesApp.Web.Views.Employees;
-
 using EmployeesApp.Web.Services;
+using EmployeesApp.Web.Views.Employees;
 using Microsoft.AspNetCore.Mvc;
+using System.Reflection;
 
 namespace EmployeesApp.Web.Controllers
 {
@@ -62,7 +62,17 @@ namespace EmployeesApp.Web.Controllers
         public IActionResult Details(int id)
         {
             var model = service.GetById(id);
-            return View(model);
+
+            var viewModel = new DetailsVM
+            {
+                Id = model.Id,
+                Name = model.Name,
+                Email = model.Email,
+                NameStartsWithA = false,
+            };
+
+            return View(viewModel);
         }
     }
 }
+
