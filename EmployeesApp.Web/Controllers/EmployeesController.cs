@@ -20,6 +20,7 @@ namespace EmployeesApp.Web.Controllers
                 EmployeeItems = model
                 .Select(o => new IndexVM.EmployeeItemVM
                 {
+                    Id = o.Id,
                     Name = o.Name,
                     Email = o.Email,
                     ShowAsHighlighted = o.Email.StartsWith("admin")
